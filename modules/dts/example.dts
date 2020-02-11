@@ -1,0 +1,14 @@
+          /dts-v1/;
+          /plugin/;
+          / {
+                  compatible = "raspberrypi";
+                  fragment@0 {
+                          target-path = "/soc";
+                          __overlay__ {
+                                  pps {
+                                          compatible = "pps-gpio";
+                                          status = "okay";
+                                  };
+                          };
+                  };
+          };

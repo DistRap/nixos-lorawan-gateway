@@ -1,0 +1,30 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+	compatible = "raspberrypi";
+	fragment@0 {
+		target-path = "/soc";
+		__overlay__ {
+			pps {
+				compatible = "pps-gpio";
+				status = "okay";
+				pinctl-name = "default";
+				pinctrl-0 = <&pps_pins>;
+				gpios = <&gpio 18 0>;
+				assert-falling-edge;
+			};
+		};
+	};
+
+	fragment@1 {
+		target = <&gpio>;
+		__overlay__ {
+			pps_pins: pps_pins {
+				brcm,pins = <18>;
+				brcm,function = <0>; // in
+				brcm,pull = <0>;    // off
+			};
+		};
+	};
+};
