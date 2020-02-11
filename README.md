@@ -3,7 +3,8 @@
 ## Build
 
 ```bash
-NIX_PATH="$NIX_PATH:lorawan-gateway=$(pwd)" nix-build --cores 0 '<nixpkgs/nixos>' -I nixos-config=configs/testing.nix -A config.system.build.sdImage -o gw
+NIX_PATH="$NIX_PATH:lorawan-gateway=$(pwd)" nix-build --cores 0 '<nixpkgs/nixos>' \
+  -I nixos-config=configs/testing.nix -A config.system.build.sdImage -o gw
 ```
 
 ## Flash
