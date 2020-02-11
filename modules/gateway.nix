@@ -52,18 +52,18 @@ with lib;
 
       networking.packet_forwarder = {
         enable = true;
-        gwid = config.gw.id; 
+        gwid = config.gw.id;
         contact_email = config.gw.contactEmail;
-        description = config.gw.description; 
+        description = config.gw.description;
       };
     })
 
     (mkIf config.gw.develMode {
       services.openssh.permitRootLogin = "yes";
       services.mingetty.autologinUser = "root";
-  
+
       users.extraUsers.root.initialHashedPassword = "";
-  
+
       environment.systemPackages = with pkgs; [
         git
         vim

@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 {
   imports = [
-    <lorawan-gateway> 
+    <lorawan-gateway>
   ];
 
   environment.systemPackages = with pkgs; [

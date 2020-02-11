@@ -28,7 +28,7 @@
         fragment@1 {
 		target = <&alt0>;
 		__overlay__ {
-			// Drop GPIO 7, SPI 8-11 
+			// Drop GPIO 7, SPI 8-11
 			brcm,pins = <4 5>;
 		};
 	};

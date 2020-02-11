@@ -125,7 +125,7 @@ in {
         PIN=${toString cfg.gpioResetPin}
         D=${toString cfg.gpioResetDelay}
         ${pkgs.libgpiod}/bin/gpioset --mode=time --sec=$D pinctrl-bcm2835 $PIN=1
-        
+
         #source ${pkgs.ail_gpio}/ail_gpio
         #gpiochip_base 1994
         #output $PIN

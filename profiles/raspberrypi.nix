@@ -12,10 +12,10 @@
   boot.loader.generic-extlinux-compatible.configurationLimit = 4;
 
   boot.kernelParams = [
-    "modprobe.blacklist=pps_ldisc" 
+    "modprobe.blacklist=pps_ldisc"
   ] ++
       (if # use ttyAMA0 as console unless used by GPS
-        (config.gw.gps.device != "/dev/ttyAMA0") 
+        (config.gw.gps.device != "/dev/ttyAMA0")
         then [ "console=ttyAMA0,115200n8" ]
         else [ "console=tty0" ]);
 
@@ -25,7 +25,7 @@
     '';
   };
 
-  sdImage = 
+  sdImage =
   let
     extlinux-conf-builder =
       import <nixpkgs/nixos/modules/system/boot/loader/generic-extlinux-compatible/extlinux-conf-builder.nix> {

@@ -15,7 +15,7 @@ with lib;
       { name = "spi"; dtsFile = ./dts/spi.dts; }
       { name = "example"; dtsFile = ./dts/example.dts; }
     ];
-  
+
     boot.consoleLogLevel = lib.mkDefault 7;
     boot.kernelPackages = pkgs.linuxPackages_latest;
     boot.kernelPatches = lib.optional config.gw.customKernel [
@@ -40,7 +40,7 @@ with lib;
            SOUND n
            VIRTUALIZATION n
          '';
-       } 
+       }
     ];
   };
 }

@@ -28,7 +28,7 @@ in
         refclock SHM 0 refid NMEA
         ''}
         makestep 0.1 1
-  
+
         ${optionalString cfg.public ''
         # Allow computers on the unrouted nets to use the server.
         allow 10/8
