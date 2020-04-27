@@ -31,6 +31,7 @@ with lib;
       develMode = mkOption {
         type = types.bool;
         description = "Use for development only to e.g. autologin root";
+        default = false;
       };
     };
   };
