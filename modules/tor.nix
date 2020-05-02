@@ -9,10 +9,11 @@ with lib;
   };
 
   config = mkIf config.gw.tor.enable {
-    services.tor.enable = true;
-    services.tor.extraConfig = ''
-      HiddenServiceDir /var/lib/tor/hidden_ssh/
-      HiddenServicePort 22 127.0.0.1:22
-    '';
+    services.tor = {
+      enable = true;
+      hiddenServices."lorawangw".map = [
+        { port = 22; }
+      ];
+    };
   };
 }
