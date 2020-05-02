@@ -9,5 +9,9 @@
 
   documentation.enable = false;
   documentation.nixos.enable = false;
+  # this pulls too much graphical stuff
   services.udisks2.enable = lib.mkForce false;
+
+  # this pulls spidermonkey and firefox
+  security.polkit.enable = false;
 }
