@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 {
   imports = [
-    ./modules/gateway.nix
-    ./profiles/raspberrypi.nix
+    <lorawan-gateway>
+    ../profiles/raspberrypi.nix
   ];
 
   environment.systemPackages = with pkgs; [

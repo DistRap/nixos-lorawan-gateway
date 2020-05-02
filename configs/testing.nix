@@ -2,6 +2,7 @@
 {
   imports = [
     <lorawan-gateway>
+    ../profiles/raspberrypi.nix
   ];
 
   environment.systemPackages = with pkgs; [
