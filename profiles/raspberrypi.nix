@@ -36,6 +36,8 @@
     # causes bzip2 compression of image already compressed by zstd
     compressImage = false;
 
+    imageBaseName = "nixos-lorawan-gateway-sd-image";
+
     populateFirmwareCommands = let
       configTxt = pkgs.writeText "config.txt" ''
         # Prevent the firmware from smashing the framebuffer setup done by the mainline kernel
