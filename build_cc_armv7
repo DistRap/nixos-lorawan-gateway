@@ -1,0 +1,2 @@
+NIX_PATH="$NIX_PATH:lorawan-gateway=$(pwd)" nix-build --cores 0 '<nixpkgs/nixos>' \
+  -I nixos-config=configs/cross_armv7.nix -A config.system.build.sdImage -o gw --keep-going

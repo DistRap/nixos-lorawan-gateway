@@ -1,0 +1,3 @@
+# rpi_int_staging branch
+
+NIX_PATH=nixpkgs=/home/srk/git/nixpkgs/rpi_int/ ./build_cc_armv7
