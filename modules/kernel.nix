@@ -29,7 +29,7 @@ with lib;
          name = "gpio-sysfs-config";
          patch = null;
          extraConfig = ''
-           CONFIG_GPIO_SYSFS y
+           GPIO_SYSFS y
          '';
        }
        {
