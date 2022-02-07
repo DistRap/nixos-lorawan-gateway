@@ -61,7 +61,7 @@ with lib;
 
     (mkIf config.gw.develMode {
       services.openssh.permitRootLogin = "yes";
-      services.mingetty.autologinUser = "root";
+      services.getty.autologinUser = "root";
 
       users.extraUsers.root.initialHashedPassword = "";
 
