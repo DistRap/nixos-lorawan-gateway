@@ -1,8 +1,6 @@
-{ stdenv, fetchFromGitHub
+{ stdenv, lib, fetchFromGitHub
 , gwPlatform ? "imst_rpi"
 }:
-
-with stdenv.lib;
 
 stdenv.mkDerivation rec {
   name = "lora_gateway-${version}";
@@ -31,7 +29,7 @@ stdenv.mkDerivation rec {
     cp */util_* $out/bin
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Driver for SX1301 based gateways";
     homepage = https://github.com/Lora-net/lora_gateway;
     maintainers = with maintainers; [ sorki ];

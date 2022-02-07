@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, lora_gateway }:
+{ stdenv, lib, fetchFromGitHub, lora_gateway }:
 
 with stdenv.lib;
 
@@ -24,7 +24,7 @@ stdenv.mkDerivation rec {
     cp util_*/util_* $out/bin/
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "A LoRa packet forwarder";
     homepage = https://github.com/Lora-net/packet_forwarder;
     maintainers = with maintainers; [ sorki ];
