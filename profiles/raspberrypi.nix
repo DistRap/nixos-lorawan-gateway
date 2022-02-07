@@ -2,7 +2,7 @@
 {
   imports = [
     ./arm-headless.nix
-    <nixpkgs/nixos/modules/installer/cd-dvd/sd-image.nix>
+    <nixpkgs/nixos/modules/installer/sd-card/sd-image.nix>
     <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
   ];
 
