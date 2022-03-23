@@ -18,7 +18,7 @@ with lib;
 
     boot.consoleLogLevel = lib.mkDefault 7;
     boot.kernelPackages = pkgs.linuxPackages_latest;
-    boot.kernelPatches = lib.optional config.gw.customKernel [
+    boot.kernelPatches = lib.optionals config.gw.customKernel [
        { name = "We need spidev for now";
          patch = (pkgs.fetchpatch {
            url = "https://github.com/sorki/linux/compare/v5.5...dont_bug_on_spidev_v5.5.patch";
