@@ -20,31 +20,25 @@
     id = "B827EBFFFE517AAA";
     contactEmail = "gw@example.org";
     description = "Test gateway";
-    # XXX: gpsd
+    # XXX: gpsd won't crosscompile
     gps.enable = false;
-    # XXX: node_exporter
-    mon.enable = false;
-    # XXX: chrony
-    # OPT.OBJ/Linux_SINGLE_SHLIB/gcm.o: in function `gcmHash_Reset':
-    # gcm.c:(.text.gcmHash_Reset+0x88): undefined reference to `gcm_HashZeroX_hw'
+    mon.enable = true;
     ntp = {
-      enable = false;
+      enable = true;
     #  public = true;
     };
     pps.enable = true;
-    # not sure if needed
-    # tor.enable = true;
+    tor.enable = true;
     wg = {
-      enable = false;
+      enable = true;
       ip = "10.11.0.211/24";
     };
 
     customKernel = false;
-    # perl or git doesn't cc?
-    # develMode = true;
+    develMode = true;
   };
 
-  system.stateVersion = "20.03";
+  system.stateVersion = "22.05";
 
   users.extraUsers.root.openssh.authorizedKeys.keys = with (import ./ssh-keys.nix); [ srk adluc ];
 }
