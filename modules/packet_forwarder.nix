@@ -100,7 +100,7 @@ in {
       };
       servers = mkOption {
         type = types.listOf (types.submodule server);
-        default = [ { server_address = "router.eu.thethings.network"; } ];
+        default = [ { server_address = "eu1.cloud.thethings.network"; } ];
         description = "Servers to route packets to";
         apply = x: map _filter x;
       };
