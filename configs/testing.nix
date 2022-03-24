@@ -19,7 +19,7 @@
     ntp.public = true;
     wg = {
       enable = true;
-      ip = "10.11.0.211/24";
+      ips = [ "10.11.0.211/24" ];
     };
     develMode = true;
   };

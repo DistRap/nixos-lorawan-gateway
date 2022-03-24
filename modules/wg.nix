@@ -20,8 +20,8 @@ in
   options = {
     gw.wg = {
       enable = mkEnableOption "Enable my wireguard";
-      ip = mkOption {
-        type = types.str;
+      ips = mkOption {
+        type = types.listOf types.str;
       };
       endpoint = mkOption {
         type = types.str;
@@ -44,8 +44,8 @@ in
   config = mkIf cfg.enable {
     networking.wireguard.interfaces = {
       wg0 = {
-        ips = [ cfg.ip ];
-        privateKey = "../secrets/wireguard-keys/${config.gw.id}/private";
+        ips = cfg.ips;
+        privateKey = builtins.readFile ../secrets/wireguard-keys/${config.gw.id}/private;
         peers = [
           { publicKey  = cfg.pubkey;
             allowedIPs = cfg.allowedIPs;
