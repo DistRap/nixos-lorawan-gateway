@@ -8,7 +8,6 @@ with lib;
 
   config = {
 
-    hardware.deviceTree.kernelPackage = pkgs.linux_latest;
     hardware.deviceTree.filter = "*rpi*.dtb";
     hardware.deviceTree.overlays = [
       { name = "pps"; dtsFile = ./dts/pps.dts; }
@@ -17,7 +16,7 @@ with lib;
     ];
 
     boot.consoleLogLevel = lib.mkDefault 7;
-    boot.kernelPackages = pkgs.linuxPackages_latest;
+    boot.kernelPackages = pkgs.linuxPackages;
     boot.kernelPatches = lib.optionals config.gw.customKernel [
        { name = "We need spidev for now";
          patch = (pkgs.fetchpatch {
