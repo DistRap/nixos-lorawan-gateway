@@ -133,6 +133,14 @@ in {
         #sleep $D
         #lo $PIN
         #sleep $D
+
+        while true; do
+          ${pkgs.glibc.bin}/bin/getent hosts eu1.cloud.thethings.network && break
+          echo "Waiting for DNS"
+          sleep 1
+        done
+
+        sleep 30
       '';
 
       restartIfChanged = true;
