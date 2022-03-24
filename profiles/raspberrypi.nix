@@ -42,6 +42,21 @@ in
     '';
   };
 
+  system.build.uboots = pkgs.runCommand "uboots" {}
+    ''
+      mkdir $out
+      cp ${ubootPkgPi2}/u-boot.bin $out/u-boot-rpi2.bin
+      cp ${ubootPkgPi3}/u-boot.bin $out/u-boot-rpi3.bin
+    '';
+
+  system.build.firmware = pkgs.runCommand "fw" {}
+    ''
+      mkdir firmware
+      ${config.sdImage.populateFirmwareCommands}
+      mkdir $out
+      mv firmware/* $out
+    '';
+
   sdImage =
   let
     extlinux-conf-builder =
