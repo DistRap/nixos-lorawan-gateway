@@ -11,7 +11,7 @@ with lib;
   config = mkIf config.gw.tor.enable {
     services.tor = {
       enable = true;
-      hiddenServices."lorawangw".map = [
+      relay.onionServices."lorawangw".map = [
         { port = 22; }
       ];
     };
