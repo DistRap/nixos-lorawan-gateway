@@ -126,14 +126,6 @@ in {
         D=${toString cfg.gpioResetDelay}
         ${pkgs.libgpiod}/bin/gpioset --mode=time --sec=$D pinctrl-bcm2835 $PIN=1
 
-        #source ${pkgs.ail_gpio}/ail_gpio
-        #gpiochip_base 1994
-        #output $PIN
-        #hi $PIN
-        #sleep $D
-        #lo $PIN
-        #sleep $D
-
         while true; do
           ${pkgs.glibc.bin}/bin/getent hosts eu1.cloud.thethings.network && break
           echo "Waiting for DNS"
