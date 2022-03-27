@@ -33,6 +33,10 @@ in
         default = "jzHK9nCUQ7lNiphj6s9zYisk4b/9TLDLJ0izi17pXT0=";
         example = "jzHK9nCUQ7lNiphj6s9zYisk4b/9TLDLJ0izi17pXT0=";
       };
+      privkeyDir = mkOption {
+        type = types.str;
+        default = "../secrets/wireguard-keys";
+      };
       allowedIPs = mkOption {
         type = types.listOf types.str;
         default = [ "10.11.0.0/24" ];
@@ -45,7 +49,7 @@ in
     networking.wireguard.interfaces = {
       wg0 = {
         ips = cfg.ips;
-        privateKey = builtins.readFile ../secrets/wireguard-keys/${config.gw.id}/private;
+        privateKey = builtins.readFile ./${cfg.privkeyDir}/${config.gw.id}/private;
         peers = [
           { publicKey  = cfg.pubkey;
             allowedIPs = cfg.allowedIPs;
