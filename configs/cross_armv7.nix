@@ -2,7 +2,6 @@
 {
   imports = [
     <lorawan-gateway>
-    ../profiles/raspberrypi.nix
   ];
 
   nixpkgs = {
