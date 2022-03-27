@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, modulesPath, ... }:
 let
   # If rPi serial is used by GPS device, we need a special
   # uBoot (to avoid breaking up boot sequence by GPS output)
@@ -16,8 +16,8 @@ in
 {
   imports = [
     ./arm-headless.nix
-    <nixpkgs/nixos/modules/installer/sd-card/sd-image.nix>
-    <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
+    "${modulesPath}/installer/sd-card/sd-image.nix"
+    "${modulesPath}/installer/cd-dvd/channel.nix"
   ];
 
   boot.loader.timeout =
@@ -60,7 +60,7 @@ in
   sdImage =
   let
     extlinux-conf-builder =
-      import <nixpkgs/nixos/modules/system/boot/loader/generic-extlinux-compatible/extlinux-conf-builder.nix> {
+      import "${modulesPath}/system/boot/loader/generic-extlinux-compatible/extlinux-conf-builder.nix" {
         pkgs = pkgs.buildPackages;
       };
   in

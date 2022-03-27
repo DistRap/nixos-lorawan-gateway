@@ -30,7 +30,7 @@
     pps.enable = true;
     tor.enable = true;
     wg = {
-      enable = true;
+      enable = !true;
       ips = [ "10.11.0.211/24" ];
     };
 
