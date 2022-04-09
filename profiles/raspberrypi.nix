@@ -1,12 +1,29 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, modulesPath, ... }:
+let
+  # If rPi serial is used by GPS device, we need a special
+  # uBoot (to avoid breaking up boot sequence by GPS output)
+  # and no Linux console
+  serialUnused = config.gw.gps.device != "/dev/ttyAMA0";
+  ubootPkgPi2 =
+    if serialUnused
+    then pkgs.ubootRaspberryPi2
+    else pkgs.ubootRaspberryPi2_zeroBootDelay;
+  ubootPkgPi3 =
+    if serialUnused
+    then pkgs.ubootRaspberryPi3_32bit
+    else pkgs.ubootRaspberryPi3_32bit_zeroBootDelay;
+in
 {
   imports = [
     ./arm-headless.nix
-    <nixpkgs/nixos/modules/installer/cd-dvd/sd-image.nix>
-    <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
+    "${modulesPath}/installer/sd-card/sd-image.nix"
+    "${modulesPath}/installer/cd-dvd/channel.nix"
   ];
 
-  boot.loader.timeout = -1;
+  boot.loader.timeout =
+    if serialUnused
+    then 1
+    else 0;
   boot.loader.grub.enable = false;
   boot.loader.generic-extlinux-compatible.enable = true;
   boot.loader.generic-extlinux-compatible.configurationLimit = 4;
@@ -15,7 +32,7 @@
     "modprobe.blacklist=pps_ldisc"
   ] ++
       (if # use ttyAMA0 as console unless used by GPS
-        (config.gw.gps.device != "/dev/ttyAMA0")
+        serialUnused
         then [ "console=ttyAMA0,115200n8" ]
         else [ "console=tty0" ]);
 
@@ -25,10 +42,25 @@
     '';
   };
 
+  system.build.uboots = pkgs.runCommand "uboots" {}
+    ''
+      mkdir $out
+      cp ${ubootPkgPi2}/u-boot.bin $out/u-boot-rpi2.bin
+      cp ${ubootPkgPi3}/u-boot.bin $out/u-boot-rpi3.bin
+    '';
+
+  system.build.firmware = pkgs.runCommand "fw" {}
+    ''
+      mkdir firmware
+      ${config.sdImage.populateFirmwareCommands}
+      mkdir $out
+      mv firmware/* $out
+    '';
+
   sdImage =
   let
     extlinux-conf-builder =
-      import <nixpkgs/nixos/modules/system/boot/loader/generic-extlinux-compatible/extlinux-conf-builder.nix> {
+      import "${modulesPath}/system/boot/loader/generic-extlinux-compatible/extlinux-conf-builder.nix" {
         pkgs = pkgs.buildPackages;
       };
   in
@@ -58,16 +90,13 @@
       '';
       in ''
         (cd ${pkgs.raspberrypifw}/share/raspberrypi/boot && cp bootcode.bin fixup*.dat start*.elf $NIX_BUILD_TOP/firmware/)
-        cp ${pkgs.ubootRaspberryPi2}/u-boot.bin firmware/u-boot-rpi2.bin
-        cp ${pkgs.ubootRaspberryPi3_32bit}/u-boot.bin firmware/u-boot-rpi3.bin
+        cp ${ubootPkgPi2}/u-boot.bin firmware/u-boot-rpi2.bin
+        cp ${ubootPkgPi3}/u-boot.bin firmware/u-boot-rpi3.bin
         cp ${configTxt} firmware/config.txt
       '';
-        # we used these before to avoid gps output breaking boot
-        #cp ${pkgs.ubootRaspberryPi2_NoDelays}/u-boot.bin firmware/u-boot-rpi2.bin
-        #cp ${pkgs.ubootRaspberryPi3_32bit_NoDelays}/u-boot.bin firmware/u-boot-rpi3.bin
     populateRootCommands = ''
         mkdir -p ./files/boot
-        ${extlinux-conf-builder} -t 3 -c ${config.system.build.toplevel} -d ./files/boot
+        ${config.boot.loader.generic-extlinux-compatible.populateCmd} -c ${config.system.build.toplevel} -d ./files/boot
       '';
   };
 }

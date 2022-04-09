@@ -45,6 +45,11 @@ with lib;
 
       gw.ntp.enable = mkDefault true;
       services.openssh.enable = true;
+      security.pam.services.sshd.showMotd = true;
+      users.motd = ''
+        NixOS LoraWAN Gateway
+        Gateway ID: ${config.gw.id}
+      '';
 
       environment.systemPackages = with pkgs; [
         packet_forwarder
@@ -61,7 +66,7 @@ with lib;
 
     (mkIf config.gw.develMode {
       services.openssh.permitRootLogin = "yes";
-      services.mingetty.autologinUser = "root";
+      services.getty.autologinUser = "root";
 
       users.extraUsers.root.initialHashedPassword = "";
 

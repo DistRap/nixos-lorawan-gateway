@@ -1,7 +1,7 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, modulesPath, ... }:
 {
   imports = [
-    <nixpkgs/nixos/modules/profiles/base.nix>
+    "${modulesPath}/profiles/base.nix"
   ];
 
   boot.supportedFilesystems = lib.mkForce [ "vfat" ];

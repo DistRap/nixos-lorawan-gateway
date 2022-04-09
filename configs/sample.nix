@@ -2,7 +2,6 @@
 {
   imports = [
     <lorawan-gateway>
-    ../profiles/raspberrypi.nix
   ];
 
   environment.systemPackages = with pkgs; [
@@ -24,7 +23,7 @@
     # tor.enable = true;
     wg = {
       enable = true;
-      ip = "10.11.0.211/24";
+      ips = [ "10.11.0.211/24" ];
     };
 
     customKernel = false;

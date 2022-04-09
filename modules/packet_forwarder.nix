@@ -100,7 +100,7 @@ in {
       };
       servers = mkOption {
         type = types.listOf (types.submodule server);
-        default = [ { server_address = "router.eu.thethings.network"; } ];
+        default = [ { server_address = "eu1.cloud.thethings.network"; } ];
         description = "Servers to route packets to";
         apply = x: map _filter x;
       };
@@ -126,13 +126,13 @@ in {
         D=${toString cfg.gpioResetDelay}
         ${pkgs.libgpiod}/bin/gpioset --mode=time --sec=$D pinctrl-bcm2835 $PIN=1
 
-        #source ${pkgs.ail_gpio}/ail_gpio
-        #gpiochip_base 1994
-        #output $PIN
-        #hi $PIN
-        #sleep $D
-        #lo $PIN
-        #sleep $D
+        while true; do
+          ${pkgs.glibc.bin}/bin/getent hosts eu1.cloud.thethings.network && break
+          echo "Waiting for DNS"
+          sleep 1
+        done
+
+        sleep 30
       '';
 
       restartIfChanged = true;

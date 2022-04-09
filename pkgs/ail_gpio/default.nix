@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub }:
+{ stdenv, lib, fetchFromGitHub }:
 
 let
   rev = "7c5caed";
@@ -18,7 +18,7 @@ stdenv.mkDerivation {
     cp README.rst $out/
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Small bash wrapper over kernels GPIO sysfs interface";
     homepage = "https://github.com/sorki/ail_gpio";
     license = licenses.wtfpl;
