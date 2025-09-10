@@ -22,7 +22,7 @@ with lib;
     services.gpsd = {
       enable = true;
       nowait = true;
-      device = config.gw.gps.device;
+      devices = [ config.gw.gps.device ];
     };
   };
 }

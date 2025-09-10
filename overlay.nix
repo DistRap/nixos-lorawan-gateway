@@ -1,7 +1,7 @@
 (self: super:
   let
   # we use these to avoid GPS output breaking boot in case
-  # when GPS is connected to rPi UART (/dev/ttyACM0)
+  # when GPS is connected to rPi UART (/dev/ttyS1)
   ubootZeroBootDelay = x: x.overrideAttrs (old: {
     extraConfig = ''
       CONFIG_BOOTDELAY=0

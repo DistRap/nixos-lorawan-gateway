@@ -3,7 +3,7 @@ let
   # If rPi serial is used by GPS device, we need a special
   # uBoot (to avoid breaking up boot sequence by GPS output)
   # and no Linux console
-  serialUnused = config.gw.gps.device != "/dev/ttyAMA0";
+  serialUnused = config.gw.gps.device != [ "/dev/ttyS1" ];
   ubootPkgPi2 =
     if serialUnused
     then pkgs.ubootRaspberryPi2
