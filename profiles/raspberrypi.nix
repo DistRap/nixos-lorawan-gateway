@@ -31,9 +31,9 @@ in
   boot.kernelParams = [
     "modprobe.blacklist=pps_ldisc"
   ] ++
-      (if # use ttyAMA0 as console unless used by GPS
+      (if # use ttyS1 as console unless used by GPS
         serialUnused
-        then [ "console=ttyAMA0,115200n8" ]
+        then [ "console=ttyS1,115200n8" ]
         else [ "console=tty0" ]);
 
   services.journald = {
