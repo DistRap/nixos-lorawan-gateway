@@ -37,7 +37,7 @@
     develMode = true;
   };
 
-  system.stateVersion = "22.05";
+  system.stateVersion = "25.05";
 
   users.extraUsers.root.openssh.authorizedKeys.keys = with (import ./ssh-keys.nix); [ srk adluc ];
 }
