@@ -12,7 +12,6 @@ with lib;
     hardware.deviceTree.overlays = [
       { name = "pps"; dtsFile = ./dts/pps.dts; }
       { name = "spi"; dtsFile = ./dts/spi.dts; }
-      { name = "example"; dtsFile = ./dts/example.dts; }
     ];
 
     boot.consoleLogLevel = lib.mkDefault 7;
