@@ -47,7 +47,7 @@ in
 
   config = mkIf cfg.enable {
     networking.wireguard.interfaces = {
-      wg0 = {
+      wg-gws = {
         ips = cfg.ips;
         privateKey = builtins.readFile ./${cfg.privkeyDir}/${config.gw.id}/private;
         peers = [
@@ -55,9 +55,15 @@ in
             allowedIPs = cfg.allowedIPs;
             endpoint   = cfg.endpoint;
             persistentKeepalive = 25;
+            name = "peer1";
           }
         ];
       };
+    };
+    # auto restart wg
+    systemd.services."wireguard-wg-gws-peer-peer1" = {
+      serviceConfig = { Restart = "on-failure"; RestartSec = "10s"; };
+      unitConfig.StartLimitIntervalSec = 0;
     };
   };
 }
