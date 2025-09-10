@@ -127,7 +127,7 @@ in {
         ${pkgs.libgpiod_1}/bin/gpioset --mode=time --sec=$D pinctrl-bcm2835 $PIN=1
 
         while true; do
-          ${pkgs.glibc.bin}/bin/getent hosts eu1.cloud.thethings.network && break
+          ${pkgs.getent}/bin/getent hosts eu1.cloud.thethings.network && break
           echo "Waiting for DNS"
           sleep 1
         done
