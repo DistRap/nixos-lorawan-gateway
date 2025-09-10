@@ -89,7 +89,7 @@ in
         core_freq=250
       '';
       in ''
-        (cd ${pkgs.raspberrypifw}/share/raspberrypi/boot && cp bootcode.bin fixup*.dat start*.elf $NIX_BUILD_TOP/firmware/)
+        (cd ${pkgs.raspberrypifw}/share/raspberrypi/boot && cp bootcode.bin fixup*.dat start*.elf *.dtb $NIX_BUILD_TOP/firmware/)
         cp ${ubootPkgPi2}/u-boot.bin firmware/u-boot-rpi2.bin
         cp ${ubootPkgPi3}/u-boot.bin firmware/u-boot-rpi3.bin
         cp ${configTxt} firmware/config.txt
