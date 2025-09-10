@@ -2,7 +2,7 @@
 /plugin/;
 
 / {
-	compatible = "raspberrypi";
+	compatible = "raspberrypi,3-model-b";
 	fragment@0 {
 		target = <&spi>;
 		__overlay__ {
