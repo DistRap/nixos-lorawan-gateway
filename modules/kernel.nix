@@ -15,14 +15,8 @@ with lib;
     ];
 
     boot.consoleLogLevel = lib.mkDefault 7;
-    boot.kernelPackages = pkgs.linuxPackages;
+    boot.kernelPackages = pkgs.linuxPackages_latest;
     boot.kernelPatches = lib.optionals config.gw.customKernel [
-       { name = "We need spidev for now";
-         patch = (pkgs.fetchpatch {
-           url = "https://github.com/sorki/linux/compare/v5.5...dont_bug_on_spidev_v5.5.patch";
-           sha256 = "0ym377nv0c1mf1fxx4d2wnmn8nan1h5mv7ic39icxdp97cg1i4lb";
-         });
-       }
        {
          name = "gpio-sysfs-config";
          patch = null;
