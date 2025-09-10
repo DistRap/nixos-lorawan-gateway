@@ -124,7 +124,7 @@ in {
 
         PIN=${toString cfg.gpioResetPin}
         D=${toString cfg.gpioResetDelay}
-        ${pkgs.libgpiod}/bin/gpioset --mode=time --sec=$D pinctrl-bcm2835 $PIN=1
+        ${pkgs.libgpiod_1}/bin/gpioset --mode=time --sec=$D pinctrl-bcm2835 $PIN=1
 
         while true; do
           ${pkgs.glibc.bin}/bin/getent hosts eu1.cloud.thethings.network && break

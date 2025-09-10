@@ -5,7 +5,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    libgpiod
+    libgpiod_1
   ];
 
   gw = {
