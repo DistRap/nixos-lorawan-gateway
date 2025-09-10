@@ -15,9 +15,8 @@ let
 in
 {
   imports = [
-    ./arm-headless.nix
+    ./arm.nix
     "${modulesPath}/installer/sd-card/sd-image.nix"
-    "${modulesPath}/installer/cd-dvd/channel.nix"
   ];
 
   boot.loader.timeout =
