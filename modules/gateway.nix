@@ -65,7 +65,7 @@ with lib;
     })
 
     (mkIf config.gw.develMode {
-      services.openssh.permitRootLogin = "yes";
+      services.openssh.settings.PermitRootLogin = "yes";
       services.getty.autologinUser = "root";
 
       users.extraUsers.root.initialHashedPassword = "";
