@@ -22,7 +22,7 @@ in
       enable = true;
       extraConfig = ''
         ${optionalString config.gw.pps.enable ''
-        refclock PPS ${config.gw.pps.device} refid PPS
+        refclock PPS ${config.gw.pps.device} refid PPS lock NMEA
         ''}
         ${optionalString config.gw.gps.enable ''
         refclock SHM 0 refid NMEA
