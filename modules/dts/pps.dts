@@ -12,7 +12,7 @@
 				pinctl-name = "default";
 				pinctrl-0 = <&pps_pins>;
 				gpios = <&gpio 18 0>;
-				assert-falling-edge;
+				assert-rising-edge;
 			};
 		};
 	};
