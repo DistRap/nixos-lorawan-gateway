@@ -27,13 +27,11 @@ in
   boot.loader.generic-extlinux-compatible.enable = true;
   boot.loader.generic-extlinux-compatible.configurationLimit = 4;
 
-  boot.kernelParams = [
-    "modprobe.blacklist=pps_ldisc"
-  ] ++
-      (if # use ttyS1 as console unless used by GPS
-        serialUnused
-        then [ "console=ttyS1,115200n8" ]
-        else [ "console=tty0" ]);
+  boot.kernelParams = 
+    (if # use ttyS1 as console unless used by GPS
+      serialUnused
+      then [ "console=ttyS1,115200n8" ]
+      else [ "console=tty0" ]);
 
   services.journald = {
     extraConfig = ''
